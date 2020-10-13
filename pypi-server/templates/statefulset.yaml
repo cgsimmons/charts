@@ -39,7 +39,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["pypi-server"]
           args:
-            - --passwords=/config/passwords
+            - --passwords={{ .Values.auth.passwords | default ("/config/passwords") }}
             - --authenticate={{ .Values.auth.actions }}
             - --port=8080
             {{- range .Values.server.extraArgs }}
